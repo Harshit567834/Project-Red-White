@@ -27,8 +27,10 @@ Backend: Node.js (Express)
 
 Data: Local JSON storage (polls.json)
 
-👑 Credits
+📄 Credits
 
-Developer: Harshit
+👑 Developer: Harshit
 
-Music: “Aventure” (Royalty-Free Instrumental)
+🎵 Music: “Aventure” (Royalty-Free Instrumental)
+
+❤ Special Thanks: Arhat, Satrajit, The Calcutta Boys' School Programming Team. And You, fellow user.
