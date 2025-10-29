@@ -1,118 +1,95 @@
-/* ========== Base Reset ========== */
+/* -------- Base Reset -------- */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background: linear-gradient(145deg, #ff3b30, #ff6262, #ffffff);
-  background-size: 300% 300%;
-  animation: bgShift 12s ease-in-out infinite;
-  color: #0f0f0f;
+  background: linear-gradient(145deg, #ff3b30 0%, #ffffff 90%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  overflow-x: hidden;
+  color: #0f0f0f;
 }
 
-/* ========== Animations ========== */
-@keyframes bgShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* ========== Header ========== */
+/* -------- Header -------- */
 header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 25px 40px;
-  backdrop-filter: blur(12px);
+  justify-content: flex-end;
+  padding: 20px;
 }
 
 .logo {
   width: 80px;
   height: auto;
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
-  transition: transform 0.3s ease;
-}
-.logo:hover {
-  transform: scale(1.08);
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-/* ========== Titles ========== */
+/* -------- Titles -------- */
 main {
   text-align: center;
-  padding: 40px 20px;
+  padding: 20px;
 }
 
 .title {
   font-size: 3.5rem;
-  font-weight: 800;
-  background: linear-gradient(90deg, #fff, #ff3b30, #ffffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  color: #0f0f0f;
   letter-spacing: -1px;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 .subtitle {
+  font-size: 1.2rem;
   margin-top: 10px;
-  color: rgba(0, 0, 0, 0.75);
-  font-size: 1.1rem;
-  letter-spacing: 0.3px;
+  color: rgba(0,0,0,0.7);
 }
 
-/* ========== Buttons ========== */
+/* -------- Buttons -------- */
+.buttons {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
 .btn {
-  padding: 14px 40px;
+  padding: 15px 40px;
   font-size: 1.1rem;
   font-weight: 600;
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.25s ease;
-  margin: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn.red {
-  background: linear-gradient(145deg, #ff3b30, #ff6262);
-  color: #fff;
-  box-shadow: 0 6px 20px rgba(255, 59, 48, 0.3);
+  background-color: #ff3b30;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
 }
+
 .btn.white {
-  background: rgba(255, 255, 255, 0.3);
-  color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+  background-color: white;
+  color: #ff3b30;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* ========== Forms ========== */
+/* -------- Forms -------- */
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
-  gap: 20px;
-  backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.15);
-  padding: 30px;
-  border-radius: 24px;
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  gap: 15px;
 }
 
 input[type="text"],
@@ -120,14 +97,12 @@ input[type="number"],
 textarea {
   width: 320px;
   max-width: 90%;
-  padding: 14px 18px;
-  border: 2px solid rgba(255, 255, 255, 0.4);
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
+  padding: 12px 15px;
+  border: 2px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
   font-size: 1rem;
   outline: none;
-  transition: all 0.3s ease;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 textarea {
@@ -137,78 +112,83 @@ textarea {
 
 input:focus,
 textarea:focus {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: #fff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+  border: 2px solid #ff3b30;
+  box-shadow: 0 0 8px rgba(255, 59, 48, 0.2);
 }
 
-/* ========== Poll Display ========== */
-#pollArea {
-  margin-top: 40px;
-  text-align: center;
+#result, #pollArea {
+  margin-top: 30px;
+  font-size: 1.1rem;
+  color: #111;
 }
+
+/* -------- Poll candidate buttons -------- */
 #pollArea .btn {
-  width: 240px;
   display: block;
   margin: 10px auto;
+  width: 220px;
 }
 
-/* ========== Timer ========== */
+/* -------- Footer -------- */
+footer {
+  text-align: center;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.9rem;
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 600px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  input, textarea {
+    width: 90%;
+  }
+}
+/* --- Music toggle --- */
+#musicToggle {
+  padding: 10px 25px;
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+}
+/* -------- Timer -------- */
 #timer {
   margin-top: 25px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  font-size: 1.2rem;
+  color: #0f0f0f;
+  font-weight: 600;
+  text-align: center;
 }
 
-/* ========== Control Panel ========== */
+/* -------- Control Panel -------- */
 .control-panel {
-  margin-top: 50px;
-  padding: 25px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-  width: 400px;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid #ff3b30;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.2);
 }
 
 .control-panel h3 {
-  color: #fff;
-  font-weight: 700;
-  margin-bottom: 12px;
+  color: #ff3b30;
+  margin-bottom: 15px;
 }
 
 .ended-text {
-  color: #ffb3b3;
+  color: #ff3b30;
   font-weight: 600;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .winner-text {
-  color: #fff;
+  color: #0f0f0f;
   margin-top: 10px;
   font-size: 1.1rem;
-}
-
-/* ========== Footer ========== */
-footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9rem;
-  color: #fff;
-  opacity: 0.85;
-  letter-spacing: 0.4px;
-}
-
-/* ========== Responsiveness ========== */
-@media (max-width: 700px) {
-  .title { font-size: 2.4rem; }
-  form { width: 90%; }
-  input, textarea { width: 100%; }
-  .btn { width: 90%; }
 }
