@@ -1,177 +1,214 @@
-/* === RESET === */
+/* ========== Base Reset ========== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
 }
 
-/* === PAGE BODY === */
 body {
-  background-color: #d3d3d3;          /* machine grey */
+  background: linear-gradient(145deg, #ff3b30, #ff6262, #ffffff);
+  background-size: 300% 300%;
+  animation: bgShift 12s ease-in-out infinite;
+  color: #0f0f0f;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: #111;
+  overflow-x: hidden;
 }
 
-/* === HEADER === */
+/* ========== Animations ========== */
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ========== Header ========== */
 header {
   display: flex;
-  justify-content: flex-end;
-  padding: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 40px;
+  backdrop-filter: blur(12px);
 }
 
 .logo {
   width: 80px;
   height: auto;
-  border-radius: 4px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+  transition: transform 0.3s ease;
+}
+.logo:hover {
+  transform: scale(1.08);
 }
 
-/* === TITLES === */
+/* ========== Titles ========== */
 main {
   text-align: center;
-  padding: 20px;
+  padding: 40px 20px;
 }
 
 .title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: #111;
+  font-size: 3.5rem;
+  font-weight: 800;
+  background: linear-gradient(90deg, #fff, #ff3b30, #ffffff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -1px;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 .subtitle {
-  font-size: 1rem;
-  margin-top: 8px;
-  color: #444;
+  margin-top: 10px;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 1.1rem;
+  letter-spacing: 0.3px;
 }
 
-/* === BUTTONS === */
+/* ========== Buttons ========== */
 .btn {
-  display: inline-block;
-  padding: 12px 32px;
-  font-size: 1rem;
+  padding: 14px 40px;
+  font-size: 1.1rem;
   font-weight: 600;
-  border: 2px solid #666;
-  border-radius: 6px;
-  background-color: #e0e0e0;
-  color: #111;
+  border: none;
+  border-radius: 14px;
   cursor: pointer;
-  transition: all 0.1s ease;
-  box-shadow: 0 3px 0 #999;
+  transition: all 0.25s ease;
+  margin: 10px;
+}
+
+.btn.red {
+  background: linear-gradient(145deg, #ff3b30, #ff6262);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(255, 59, 48, 0.3);
+}
+.btn.white {
+  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
 }
 
 .btn:hover {
-  background-color: #f0f0f0;
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.btn:active {
-  transform: translateY(2px);
-  box-shadow: 0 1px 0 #777;
-}
-
-/* === FORM ELEMENTS === */
+/* ========== Forms ========== */
 form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 30px;
-  gap: 10px;
+  margin-top: 40px;
+  gap: 20px;
+  backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.15);
+  padding: 30px;
+  border-radius: 24px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 }
 
 input[type="text"],
 input[type="number"],
 textarea {
-  width: 300px;
+  width: 320px;
   max-width: 90%;
-  padding: 10px 14px;
-  border: 2px solid #999;
-  border-radius: 6px;
-  background-color: #f8f8f8;
-  font-size: 0.95rem;
-  color: #111;
+  padding: 14px 18px;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1rem;
   outline: none;
+  transition: all 0.3s ease;
 }
 
 textarea {
+  height: 120px;
   resize: none;
-  height: 100px;
 }
 
 input:focus,
 textarea:focus {
-  border-color: #555;
-  background-color: #fff;
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
 }
 
-/* === POLL AREA === */
+/* ========== Poll Display ========== */
 #pollArea {
-  margin-top: 30px;
-}
-
-#pollArea .btn {
-  width: 200px;
-  margin: 6px auto;
-  display: block;
-}
-
-/* === TIMER === */
-#timer {
-  margin-top: 20px;
-  font-size: 1.1rem;
-  color: #222;
-  font-weight: 600;
-}
-
-/* === CONTROL PANEL === */
-.control-panel {
-  margin-top: 30px;
-  background-color: #e9e9e9;
-  border: 2px solid #777;
-  border-radius: 8px;
-  padding: 15px;
+  margin-top: 40px;
   text-align: center;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+#pollArea .btn {
+  width: 240px;
+  display: block;
+  margin: 10px auto;
+}
+
+/* ========== Timer ========== */
+#timer {
+  margin-top: 25px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* ========== Control Panel ========== */
+.control-panel {
+  margin-top: 50px;
+  padding: 25px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  width: 400px;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .control-panel h3 {
-  margin-bottom: 10px;
-  color: #222;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 12px;
 }
 
 .ended-text {
-  color: #a00;
+  color: #ffb3b3;
   font-weight: 600;
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .winner-text {
-  color: #111;
+  color: #fff;
   margin-top: 10px;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
 }
 
-/* === FOOTER === */
+/* ========== Footer ========== */
 footer {
   text-align: center;
-  padding: 10px;
-  font-size: 0.85rem;
-  color: #555;
+  padding: 20px;
+  font-size: 0.9rem;
+  color: #fff;
+  opacity: 0.85;
+  letter-spacing: 0.4px;
 }
 
-footer p {
-  display: inline-block;
-  background-color: #e0e0e0;
-  padding: 4px 10px;
-  border-radius: 4px;
-  border: 1px solid #999;
-}
-
-/* === RESPONSIVE === */
-@media (max-width: 600px) {
-  .title { font-size: 2rem; }
-  .btn { width: 80%; }
-  input, textarea { width: 85%; }
+/* ========== Responsiveness ========== */
+@media (max-width: 700px) {
+  .title { font-size: 2.4rem; }
+  form { width: 90%; }
+  input, textarea { width: 100%; }
+  .btn { width: 90%; }
 }
