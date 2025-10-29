@@ -1,0 +1,14 @@
+{
+  "name": "red-white",
+  "version": "1.0.0",
+  "description": "A sleek student polling website called Red-White.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Harshit",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

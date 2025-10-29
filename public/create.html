@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Poll - Red White</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <img src="/image.jpg" alt="Logo" class="logo" />
+  </header>
+
+  <main>
+    <h1 class="title">Create a Poll</h1>
+    <form id="createForm">
+      <input type="text" id="owner" placeholder="Your Name" required />
+      <textarea
+        id="candidates"
+        placeholder="Enter candidate names separated by commas"
+        required
+      ></textarea>
+      <input
+        type="number"
+        id="duration"
+        placeholder="Duration in minutes"
+        required
+      />
+      <button type="submit" class="btn red">Create</button>
+    </form>
+
+    <div id="result" style="margin-top:30px;"></div>
+  </main>
+
+  <footer>
+    <p>Made by Harshit</p>
+  </footer>
+
+  <script>
+    console.log("✅ create.html loaded");
+
+    document.getElementById("createForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const owner = document.getElementById("owner").value;
+      const candidates = document.getElementById("candidates").value
+        .split(",")
+        .map(c => c.trim())
+        .filter(c => c !== "");
+      const duration = parseInt(document.getElementById("duration").value);
+
+      try {
+        console.log("📤 Sending data to server...");
+        const res = await fetch("/api/create", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ owner, candidates, duration })
+        });
+
+        const text = await res.text(); // read as text first
+        console.log("📥 Raw response:", text);
+
+        const data = JSON.parse(text);
+        if (data.error) {
+          alert("❌ Error: " + data.error);
+        } else {
+          alert(`✅ Poll created successfully!\nPoll ID: ${data.id}`);
+          document.getElementById("result").innerHTML =
+            `<h3>Poll Created!</h3><p>Share this Poll ID: <b>${data.id}</b></p>`;
+        }
+      } catch (err) {
+        console.error("❌ Error creating poll:", err);
+        alert("Something went wrong creating the poll.");
+      }
+    });
+  </script>
+</body>
+</html>

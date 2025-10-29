@@ -1,0 +1,194 @@
+/* -------- Base Reset -------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(145deg, #ff3b30 0%, #ffffff 90%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #0f0f0f;
+}
+
+/* -------- Header -------- */
+header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+}
+
+.logo {
+  width: 80px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+/* -------- Titles -------- */
+main {
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #0f0f0f;
+  letter-spacing: -1px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: rgba(0,0,0,0.7);
+}
+
+/* -------- Buttons -------- */
+.buttons {
+  margin-top: 60px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.btn {
+  padding: 15px 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn.red {
+  background-color: #ff3b30;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.3);
+}
+
+.btn.white {
+  background-color: white;
+  color: #ff3b30;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* -------- Forms -------- */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+  gap: 15px;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 320px;
+  max-width: 90%;
+  padding: 12px 15px;
+  border: 2px solid rgba(0,0,0,0.1);
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+textarea {
+  height: 120px;
+  resize: none;
+}
+
+input:focus,
+textarea:focus {
+  border: 2px solid #ff3b30;
+  box-shadow: 0 0 8px rgba(255, 59, 48, 0.2);
+}
+
+#result, #pollArea {
+  margin-top: 30px;
+  font-size: 1.1rem;
+  color: #111;
+}
+
+/* -------- Poll candidate buttons -------- */
+#pollArea .btn {
+  display: block;
+  margin: 10px auto;
+  width: 220px;
+}
+
+/* -------- Footer -------- */
+footer {
+  text-align: center;
+  padding: 15px;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 0.9rem;
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 600px) {
+  .title {
+    font-size: 2.5rem;
+  }
+  .buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+  input, textarea {
+    width: 90%;
+  }
+}
+/* --- Music toggle --- */
+#musicToggle {
+  padding: 10px 25px;
+  font-size: 0.95rem;
+  margin-bottom: 40px;
+}
+/* -------- Timer -------- */
+#timer {
+  margin-top: 25px;
+  font-size: 1.2rem;
+  color: #0f0f0f;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* -------- Control Panel -------- */
+.control-panel {
+  margin-top: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 2px solid #ff3b30;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.2);
+}
+
+.control-panel h3 {
+  color: #ff3b30;
+  margin-bottom: 15px;
+}
+
+.ended-text {
+  color: #ff3b30;
+  font-weight: 600;
+  margin-top: 15px;
+}
+
+.winner-text {
+  color: #0f0f0f;
+  margin-top: 10px;
+  font-size: 1.1rem;
+}

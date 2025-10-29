@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Poll - Red White</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <img src="/image.jpg" alt="Logo" class="logo" />
+  </header>
+<!-- 🎵 background music (loops automatically) -->
+<audio id="bgMusic" src="/music.mp3" preload="auto" loop></audio>
+
+  <main>
+    <h1 class="title">Join a Poll</h1>
+
+    <form id="joinForm">
+      <input type="number" id="pollId" placeholder="Enter Poll ID" required />
+      <input type="text" id="username" placeholder="Your Username" required />
+      <button type="submit" class="btn red">Join</button>
+    </form>
+
+    <div id="pollArea"></div>
+    <div id="timer"></div>
+    <div id="ownerPanel" class="control-panel" style="display:none;">
+      <h3>Owner Control Panel</h3>
+      <button id="endPollBtn" class="btn red">End Poll</button>
+    </div>
+  </main>
+
+  <footer><p>Made by Harshit</p></footer>
+
+  <script>
+    let pollId, username, endAt, pollInterval;
+
+    document.getElementById("joinForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      pollId = document.getElementById("pollId").value;
+      username = document.getElementById("username").value;
+      await loadPoll();
+    });
+
+    async function loadPoll() {
+      const res = await fetch(`/api/poll/${pollId}`);
+      const poll = await res.json();
+
+      if (poll.error) return alert(poll.error);
+      renderPoll(poll);
+
+      clearInterval(pollInterval);
+      pollInterval = setInterval(loadPoll, 5000);
+      startCountdown(poll.endAt);
+    }
+
+    async function vote(candidate) {
+      const res = await fetch(`/api/vote/${pollId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ candidate, username }),
+      });
+      const data = await res.json();
+      alert(data.message || data.error);
+      await loadPoll();
+    }
+
+    function renderPoll(poll) {
+      const container = document.getElementById("pollArea");
+      container.innerHTML = `<h3>${poll.owner}'s Poll</h3>`;
+
+      if (poll.ended) {
+        container.innerHTML += `<p class="ended-text">Poll has ended!</p>`;
+        const winner = Object.entries(poll.votes).sort((a,b)=>b[1]-a[1])[0];
+        container.innerHTML += `<p class="winner-text">🏆 Winner: <b>${winner[0]}</b> with ${winner[1]} votes</p>`;
+        clearInterval(pollInterval);
+        return;
+      }
+
+      poll.candidates.forEach((c) => {
+        const btn = document.createElement("button");
+        btn.textContent = `${c} (${poll.votes[c]})`;
+        btn.className = "btn white";
+        btn.onclick = () => vote(c);
+        container.appendChild(btn);
+      });
+
+      // Show owner panel if user is poll owner
+      if (username === poll.owner) {
+        document.getElementById("ownerPanel").style.display = "block";
+      }
+    }
+
+    function startCountdown(endAtTime) {
+      endAt = endAtTime;
+      const timerEl = document.getElementById("timer");
+      clearInterval(timerEl._interval);
+      timerEl._interval = setInterval(() => {
+        const remaining = endAt - Date.now();
+        if (remaining <= 0) {
+          clearInterval(timerEl._interval);
+          timerEl.textContent = "Poll ended.";
+          return;
+        }
+        const mins = Math.floor(remaining / 60000);
+        const secs = Math.floor((remaining % 60000) / 1000);
+        timerEl.textContent = `Time left: ${mins}m ${secs}s`;
+      }, 1000);
+    }
+
+    document.getElementById("endPollBtn").addEventListener("click", async () => {
+      const res = await fetch(`/api/end/${pollId}`, { method: "POST" });
+      const data = await res.json();
+      alert(data.message);
+      await loadPoll();
+    });
+    // ===== Background Music Logic =====
+const bgMusic = document.getElementById("bgMusic");
+
+// Autoplay only after first user interaction (browser rule)
+document.body.addEventListener(
+  "click",
+  () => {
+    if (bgMusic.paused) {
+      bgMusic.volume = 0.4;
+      bgMusic.play().catch(() => {});
+    }
+  },
+  { once: true }
+);
+
+// Optional toggle button (small)
+const musicBtn = document.createElement("button");
+musicBtn.textContent = "🎵 Toggle Music";
+musicBtn.className = "btn white";
+musicBtn.style.marginTop = "15px";
+document.querySelector("footer").appendChild(musicBtn);
+
+musicBtn.addEventListener("click", () => {
+  if (bgMusic.paused) bgMusic.play();
+  else bgMusic.pause();
+});
+  </script>
+</body>
+</html>
